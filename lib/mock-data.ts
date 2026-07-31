@@ -12,6 +12,7 @@ export type Show = {
   nextSeasonDate?: string;
   statusNote: string;
   genres: string[];
+  rating: number;
 };
 
 export const CATALOG: Show[] = [
@@ -25,6 +26,7 @@ export const CATALOG: Show[] = [
     nextSeasonDate: "2026-11-26",
     statusNote: "Season 5 confirmed, final season",
     genres: ["Sci-Fi", "Horror"],
+    rating: 8.6,
   },
   {
     id: "house-of-the-dragon",
@@ -35,6 +37,7 @@ export const CATALOG: Show[] = [
     currentSeason: 3,
     statusNote: "Season 3 currently airing",
     genres: ["Fantasy", "Drama"],
+    rating: 8.4,
   },
   {
     id: "severance",
@@ -46,6 +49,7 @@ export const CATALOG: Show[] = [
     nextSeasonDate: "2027-01-15",
     statusNote: "Season 3 confirmed",
     genres: ["Sci-Fi", "Thriller"],
+    rating: 8.7,
   },
   {
     id: "the-bear",
@@ -56,6 +60,7 @@ export const CATALOG: Show[] = [
     currentSeason: 3,
     statusNote: "Renewal rumored, not yet confirmed",
     genres: ["Comedy", "Drama"],
+    rating: 7.6,
   },
   {
     id: "loki",
@@ -66,6 +71,7 @@ export const CATALOG: Show[] = [
     currentSeason: 2,
     statusNote: "Series concluded after Season 2",
     genres: ["Fantasy", "Sci-Fi"],
+    rating: 8.2,
   },
   {
     id: "the-last-of-us",
@@ -77,6 +83,7 @@ export const CATALOG: Show[] = [
     nextSeasonDate: "2027-04-01",
     statusNote: "Season 3 confirmed",
     genres: ["Drama", "Horror"],
+    rating: 8.5,
   },
   {
     id: "fallout",
@@ -88,6 +95,7 @@ export const CATALOG: Show[] = [
     nextSeasonDate: "2026-12-17",
     statusNote: "Season 2 confirmed",
     genres: ["Sci-Fi", "Action"],
+    rating: 8.0,
   },
   {
     id: "wednesday",
@@ -98,6 +106,7 @@ export const CATALOG: Show[] = [
     currentSeason: 2,
     statusNote: "Season 2 currently airing",
     genres: ["Comedy", "Horror"],
+    rating: 8.1,
   },
 ];
 

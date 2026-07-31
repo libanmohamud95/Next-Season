@@ -27,7 +27,7 @@ export function DiscoverRow({
             <Poster
               title={show.title}
               seed={show.posterSeed}
-              platform={show.platform}
+              rating={show.rating}
             />
             <button
               onClick={() => onAdd(show.id)}

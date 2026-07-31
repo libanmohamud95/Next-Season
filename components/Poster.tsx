@@ -1,20 +1,17 @@
+import { Star } from "lucide-react";
 import { gradientFor, initialsFor } from "@/lib/poster";
-import { PLATFORM_BADGE } from "@/lib/platform";
-import type { Platform } from "@/lib/mock-data";
 
 export function Poster({
   title,
   seed,
-  platform,
+  rating,
   className = "",
 }: {
   title: string;
   seed: string;
-  platform?: Platform;
+  rating?: number;
   className?: string;
 }) {
-  const badge = platform ? PLATFORM_BADGE[platform] : undefined;
-
   return (
     <div
       className={`relative aspect-[2/3] w-full overflow-hidden rounded-lg ${className}`}
@@ -34,12 +31,10 @@ export function Poster({
         </span>
       </div>
       <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-white/5" />
-      {badge && (
-        <span
-          className="absolute left-1.5 top-1.5 rounded px-1.5 py-0.5 text-[10px] font-semibold text-white shadow-sm"
-          style={{ backgroundColor: badge.bg }}
-        >
-          {badge.abbr}
+      {rating !== undefined && (
+        <span className="absolute left-1.5 top-1.5 flex items-center gap-1 rounded-full border border-white/10 bg-black/50 px-1.5 py-0.5 text-[10px] font-semibold text-white backdrop-blur-sm">
+          <Star size={10} className="fill-amber-400 text-amber-400" />
+          {rating.toFixed(1)}
         </span>
       )}
     </div>
