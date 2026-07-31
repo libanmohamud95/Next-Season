@@ -23,7 +23,11 @@ export function ShowCard({
   return (
     <div className="group animate-fade-in relative flex flex-col overflow-hidden rounded-2xl border border-border-subtle bg-surface transition-colors hover:bg-surface-hover">
       <div className="relative p-3 pb-0">
-        <Poster title={show.title} seed={show.posterSeed} />
+        <Poster
+          title={show.title}
+          seed={show.posterSeed}
+          platform={show.platform}
+        />
         <button
           onClick={() => onRemove(show.id)}
           aria-label={`Remove ${show.title} from watchlist`}

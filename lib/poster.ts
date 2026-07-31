@@ -1,12 +1,12 @@
 const GRADIENTS = [
-  "from-violet-600 to-indigo-800",
-  "from-fuchsia-600 to-purple-900",
-  "from-sky-500 to-blue-800",
-  "from-emerald-500 to-teal-800",
-  "from-rose-500 to-red-800",
-  "from-amber-500 to-orange-800",
-  "from-cyan-500 to-sky-800",
-  "from-pink-500 to-rose-800",
+  "linear-gradient(155deg, #8b5cf6 0%, #6d28d9 45%, #1e1b4b 100%)",
+  "linear-gradient(155deg, #e879f9 0%, #a21caf 45%, #2e1065 100%)",
+  "linear-gradient(155deg, #38bdf8 0%, #1d4ed8 45%, #0f172a 100%)",
+  "linear-gradient(155deg, #34d399 0%, #0f766e 45%, #0f2027 100%)",
+  "linear-gradient(155deg, #fb7185 0%, #be123c 45%, #2c0a12 100%)",
+  "linear-gradient(155deg, #fbbf24 0%, #c2410c 45%, #2a1205 100%)",
+  "linear-gradient(155deg, #22d3ee 0%, #0369a1 45%, #0c1a2e 100%)",
+  "linear-gradient(155deg, #f472b6 0%, #9d174d 45%, #2a0a1a 100%)",
 ];
 
 function hashSeed(seed: string): number {
