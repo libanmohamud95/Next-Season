@@ -1,4 +1,4 @@
-import { CalendarCheck, CircleDot, HelpCircle, Archive } from "lucide-react";
+import { CalendarCheck, CircleDot, PauseCircle, HelpCircle, Archive } from "lucide-react";
 import type { ShowStatus } from "@/lib/mock-data";
 
 const CONFIG: Record<
@@ -16,6 +16,12 @@ const CONFIG: Record<
     color: "text-[var(--status-airing)]",
     bg: "bg-[var(--status-airing-soft)]",
     Icon: CircleDot,
+  },
+  hiatus: {
+    label: "On hiatus",
+    color: "text-[var(--status-hiatus)]",
+    bg: "bg-[var(--status-hiatus-soft)]",
+    Icon: PauseCircle,
   },
   rumored: {
     label: "Rumored",

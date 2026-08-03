@@ -7,8 +7,9 @@ import { StatsStrip } from "@/components/StatsStrip";
 import { ShowCard } from "@/components/ShowCard";
 import { AddShowDialog } from "@/components/AddShowDialog";
 import { UpdatesFeed } from "@/components/UpdatesFeed";
-import { DiscoverRow } from "@/components/DiscoverRow";
+import { ShowRow } from "@/components/ShowRow";
 import { CATALOG, DEFAULT_WATCHLIST_IDS } from "@/lib/mock-data";
+import { buildRecommendations } from "@/lib/recommendations";
 
 export function Dashboard() {
   const [watchlistIds, setWatchlistIds] = useState<string[]>(
@@ -27,6 +28,11 @@ export function Dashboard() {
   const availableToAdd = useMemo(
     () => CATALOG.filter((show) => !watchlistIds.includes(show.id)),
     [watchlistIds]
+  );
+
+  const { groups: recommendationGroups, leftover: otherShows } = useMemo(
+    () => buildRecommendations(watchlist, CATALOG),
+    [watchlist]
   );
 
   function handleAdd(id: string) {
@@ -93,7 +99,19 @@ export function Dashboard() {
           </aside>
         </div>
 
-        <DiscoverRow shows={availableToAdd} onAdd={handleAdd} />
+        {recommendationGroups.map((group) => (
+          <ShowRow
+            key={group.anchor.id}
+            title={`Because you're watching ${group.anchor.title}`}
+            shows={group.shows}
+            onAdd={handleAdd}
+          />
+        ))}
+        <ShowRow
+          title="Discover more shows"
+          shows={otherShows}
+          onAdd={handleAdd}
+        />
       </div>
 
       <AddShowDialog

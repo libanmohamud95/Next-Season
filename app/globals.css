@@ -16,6 +16,8 @@
   --status-renewed-soft: rgba(52, 211, 153, 0.14);
   --status-airing: #60a5fa;
   --status-airing-soft: rgba(96, 165, 250, 0.14);
+  --status-hiatus: #fb923c;
+  --status-hiatus-soft: rgba(251, 146, 60, 0.14);
   --status-rumored: #fbbf24;
   --status-rumored-soft: rgba(251, 191, 36, 0.14);
   --status-ended: #8b8f9c;

@@ -1,8 +1,9 @@
 "use client";
 
-import { X } from "lucide-react";
+import { Clock, X } from "lucide-react";
 import { Poster } from "@/components/Poster";
 import { StatusBadge } from "@/components/StatusBadge";
+import { countdownFor } from "@/lib/date";
 import type { Show } from "@/lib/mock-data";
 
 function formatDate(iso: string): string {
@@ -55,8 +56,14 @@ export function ShowCard({
             <span className="text-foreground/90">
               {" — "}
               {formatDate(show.nextSeasonDate)}
+              {" · "}
+              {countdownFor(show.nextSeasonDate)}
             </span>
           )}
+        </p>
+        <p className="flex items-center gap-1 text-xs text-muted-2">
+          <Clock size={11} />
+          {show.lastChecked}
         </p>
       </div>
     </div>

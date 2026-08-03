@@ -1,4 +1,4 @@
-export type ShowStatus = "renewed" | "airing" | "rumored" | "ended";
+export type ShowStatus = "renewed" | "airing" | "hiatus" | "rumored" | "ended";
 
 export type Platform = "Netflix" | "HBO Max" | "Prime Video" | "Disney+" | "Apple TV+" | "Hulu";
 
@@ -14,6 +14,7 @@ export type Show = {
   genres: string[];
   rating: number;
   posterImage?: string;
+  lastChecked: string;
 };
 
 export const CATALOG: Show[] = [
@@ -29,17 +30,19 @@ export const CATALOG: Show[] = [
     genres: ["Sci-Fi", "Horror"],
     rating: 8.6,
     posterImage: "/posters/stranger-things.jpg",
+    lastChecked: "Checked 2h ago",
   },
   {
     id: "house-of-the-dragon",
     title: "House of the Dragon",
     posterSeed: "hotd-02",
     platform: "HBO Max",
-    status: "airing",
+    status: "hiatus",
     currentSeason: 3,
-    statusNote: "Season 3 currently airing",
+    statusNote: "On hiatus between seasons — no Season 4 date yet",
     genres: ["Fantasy", "Drama"],
     rating: 8.4,
+    lastChecked: "Checked 5h ago",
   },
   {
     id: "severance",
@@ -52,6 +55,7 @@ export const CATALOG: Show[] = [
     statusNote: "Season 3 confirmed",
     genres: ["Sci-Fi", "Thriller"],
     rating: 8.7,
+    lastChecked: "Checked 1d ago",
   },
   {
     id: "snowfall",
@@ -64,6 +68,7 @@ export const CATALOG: Show[] = [
     genres: ["Crime", "Drama"],
     rating: 8.4,
     posterImage: "/posters/snowfall.jpg",
+    lastChecked: "Checked 6h ago",
   },
   {
     id: "sopranos",
@@ -76,6 +81,7 @@ export const CATALOG: Show[] = [
     genres: ["Crime", "Drama"],
     rating: 9.2,
     posterImage: "/posters/the-sopranos.jpg",
+    lastChecked: "Checked 3h ago",
   },
   {
     id: "the-last-of-us",
@@ -88,6 +94,7 @@ export const CATALOG: Show[] = [
     statusNote: "Season 3 confirmed",
     genres: ["Drama", "Horror"],
     rating: 8.5,
+    lastChecked: "Checked 4h ago",
   },
   {
     id: "fallout",
@@ -100,6 +107,7 @@ export const CATALOG: Show[] = [
     statusNote: "Season 2 confirmed",
     genres: ["Sci-Fi", "Action"],
     rating: 8.0,
+    lastChecked: "Checked 30m ago",
   },
   {
     id: "wednesday",
@@ -111,6 +119,7 @@ export const CATALOG: Show[] = [
     statusNote: "Season 2 currently airing",
     genres: ["Comedy", "Horror"],
     rating: 8.1,
+    lastChecked: "Checked 8h ago",
   },
 ];
 
