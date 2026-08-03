@@ -28,6 +28,7 @@ export function DiscoverRow({
               title={show.title}
               seed={show.posterSeed}
               rating={show.rating}
+              imageSrc={show.posterImage}
             />
             <button
               onClick={() => onAdd(show.id)}

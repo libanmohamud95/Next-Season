@@ -27,6 +27,7 @@ export function ShowCard({
           title={show.title}
           seed={show.posterSeed}
           rating={show.rating}
+          imageSrc={show.posterImage}
         />
         <button
           onClick={() => onRemove(show.id)}

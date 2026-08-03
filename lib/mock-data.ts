@@ -13,6 +13,7 @@ export type Show = {
   statusNote: string;
   genres: string[];
   rating: number;
+  posterImage?: string;
 };
 
 export const CATALOG: Show[] = [
@@ -27,6 +28,7 @@ export const CATALOG: Show[] = [
     statusNote: "Season 5 confirmed, final season",
     genres: ["Sci-Fi", "Horror"],
     rating: 8.6,
+    posterImage: "/posters/stranger-things.jpg",
   },
   {
     id: "house-of-the-dragon",
@@ -61,6 +63,7 @@ export const CATALOG: Show[] = [
     statusNote: "Series concluded after Season 5",
     genres: ["Crime", "Drama"],
     rating: 8.4,
+    posterImage: "/posters/snowfall.jpg",
   },
   {
     id: "sopranos",
@@ -72,6 +75,7 @@ export const CATALOG: Show[] = [
     statusNote: "Spin-off series rumored, not yet confirmed",
     genres: ["Crime", "Drama"],
     rating: 9.2,
+    posterImage: "/posters/the-sopranos.jpg",
   },
   {
     id: "the-last-of-us",

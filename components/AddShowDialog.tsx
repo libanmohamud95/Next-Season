@@ -85,6 +85,7 @@ export function AddShowDialog({
               <Poster
                 title={show.title}
                 seed={show.posterSeed}
+                imageSrc={show.posterImage}
                 className="w-10 shrink-0"
               />
               <span className="flex-1">
