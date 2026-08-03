@@ -42,6 +42,7 @@ export const CATALOG: Show[] = [
     statusNote: "On hiatus between seasons — no Season 4 date yet",
     genres: ["Fantasy", "Drama"],
     rating: 8.4,
+    posterImage: "/posters/house-of-the-dragon.jpg",
     lastChecked: "Checked 5h ago",
   },
   {
@@ -55,6 +56,7 @@ export const CATALOG: Show[] = [
     statusNote: "Season 3 confirmed",
     genres: ["Sci-Fi", "Thriller"],
     rating: 8.7,
+    posterImage: "/posters/severance.jpg",
     lastChecked: "Checked 1d ago",
   },
   {
@@ -94,6 +96,7 @@ export const CATALOG: Show[] = [
     statusNote: "Season 3 confirmed",
     genres: ["Drama", "Horror"],
     rating: 8.5,
+    posterImage: "/posters/the-last-of-us.jpg",
     lastChecked: "Checked 4h ago",
   },
   {
@@ -107,6 +110,7 @@ export const CATALOG: Show[] = [
     statusNote: "Season 2 confirmed",
     genres: ["Sci-Fi", "Action"],
     rating: 8.0,
+    posterImage: "/posters/fallout.jpg",
     lastChecked: "Checked 30m ago",
   },
   {
@@ -119,6 +123,7 @@ export const CATALOG: Show[] = [
     statusNote: "Season 2 currently airing",
     genres: ["Comedy", "Horror"],
     rating: 8.1,
+    posterImage: "/posters/wednesday.webp",
     lastChecked: "Checked 8h ago",
   },
 ];
