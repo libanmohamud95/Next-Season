@@ -19,8 +19,8 @@ export const RECENT_UPDATES: UpdateItem[] = [
   {
     id: "u2",
     kind: "rumored",
-    showTitle: "The Bear",
-    message: "Early buzz suggests The Bear is being renewed — not yet confirmed",
+    showTitle: "The Sopranos",
+    message: "Early buzz suggests a Sopranos spin-off is in development — not yet confirmed",
     timeAgo: "1d ago",
   },
   {
