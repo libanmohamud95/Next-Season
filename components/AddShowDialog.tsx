@@ -81,7 +81,7 @@ export function AddShowDialog({
           <label htmlFor={searchId} className="sr-only">
             Search shows to track
           </label>
-          <div className="flex items-center gap-2.5 rounded-xl border border-border-subtle bg-background/40 px-3.5 py-2.5 transition-colors focus-within:border-accent/60">
+          <div className="flex items-center gap-2.5 rounded-xl border border-border-subtle bg-background/40 px-3.5 py-2.5 transition-colors focus-within:border-accent">
             <Search size={16} className="shrink-0 text-muted-2" />
             <input
               id={searchId}
@@ -89,7 +89,7 @@ export function AddShowDialog({
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search shows to track…"
-              className="w-full bg-transparent text-sm text-foreground placeholder:text-muted-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 rounded-sm"
+              className="w-full bg-transparent text-sm text-foreground placeholder:text-muted-2 focus:outline-none"
             />
           </div>
         </div>
