@@ -59,7 +59,7 @@ export function AddShowDialog({
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search shows to track…"
-            className="w-full bg-transparent text-sm text-foreground placeholder:text-muted-2 focus:outline-none"
+            className="w-full bg-transparent text-sm text-foreground placeholder:text-muted-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 rounded-sm"
           />
           <button
             onClick={onClose}
