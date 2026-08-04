@@ -35,13 +35,6 @@ function similarity(a: Show, b: Show, weights: Map<string, number>): number {
   return score;
 }
 
-// A candidate must share at least one genre held by 4 or fewer shows in
-// the catalog (weight 1/4 = 0.25) to count as a real match. Below that,
-// the only overlap is generic tags like "Drama" that nearly everything
-// has — not a meaningful signal, so those fall back to general Discover
-// instead of cluttering a specific "Because you're watching X" row.
-const MIN_SIMILARITY = 0.25;
-
 export function buildRecommendations(
   watchlist: Show[],
   catalog: Show[]
@@ -49,6 +42,16 @@ export function buildRecommendations(
   const watchlistIds = new Set(watchlist.map((show) => show.id));
   const candidates = catalog.filter((show) => !watchlistIds.has(show.id));
   const weights = genreWeights(catalog);
+
+  // A match built from nothing but the single most common genre in the
+  // catalog (whatever that happens to be — "Drama" on a real TMDB feed)
+  // shouldn't count as "similar." Derive that floor from the catalog
+  // itself, rather than a fixed number, so it scales whether the catalog
+  // has 10 shows or 500: the most common genre always has the lowest
+  // weight, so that's the baseline a real match has to beat.
+  const genericGenreWeight =
+    weights.size > 0 ? Math.min(...weights.values()) : 0;
+  const minSimilarity = genericGenreWeight * 1.5;
 
   const byAnchor = new Map<string, Show[]>();
   const leftover: Show[] = [];
@@ -65,7 +68,7 @@ export function buildRecommendations(
       }
     }
 
-    if (bestAnchor && bestScore >= MIN_SIMILARITY) {
+    if (bestAnchor && bestScore > minSimilarity) {
       const list = byAnchor.get(bestAnchor.id) ?? [];
       list.push(candidate);
       byAnchor.set(bestAnchor.id, list);
