@@ -8,13 +8,13 @@ import { ShowCard } from "@/components/ShowCard";
 import { AddShowDialog } from "@/components/AddShowDialog";
 import { UpdatesFeed } from "@/components/UpdatesFeed";
 import { ShowRow } from "@/components/ShowRow";
-import { CATALOG, DEFAULT_WATCHLIST_IDS } from "@/lib/mock-data";
+import type { Show } from "@/lib/mock-data";
 import { buildRecommendations } from "@/lib/recommendations";
 import { loadWatchlistIds, saveWatchlistIds } from "@/lib/watchlist-storage";
 
-export function Dashboard() {
-  const [watchlistIds, setWatchlistIds] = useState<string[]>(
-    DEFAULT_WATCHLIST_IDS
+export function Dashboard({ catalog: CATALOG }: { catalog: Show[] }) {
+  const [watchlistIds, setWatchlistIds] = useState<string[]>(() =>
+    CATALOG.slice(0, 3).map((show) => show.id)
   );
   const [dialogOpen, setDialogOpen] = useState(false);
   const skipNextSave = useRef(true);
@@ -41,17 +41,17 @@ export function Dashboard() {
       watchlistIds
         .map((id) => CATALOG.find((show) => show.id === id))
         .filter((show): show is NonNullable<typeof show> => Boolean(show)),
-    [watchlistIds]
+    [watchlistIds, CATALOG]
   );
 
   const availableToAdd = useMemo(
     () => CATALOG.filter((show) => !watchlistIds.includes(show.id)),
-    [watchlistIds]
+    [watchlistIds, CATALOG]
   );
 
   const { groups: recommendationGroups, leftover: otherShows } = useMemo(
     () => buildRecommendations(watchlist, CATALOG),
-    [watchlist]
+    [watchlist, CATALOG]
   );
 
   function handleAdd(id: string) {

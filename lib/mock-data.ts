@@ -1,6 +1,6 @@
 export type ShowStatus = "renewed" | "airing" | "hiatus" | "rumored" | "ended";
 
-export type Platform = "Netflix" | "HBO Max" | "Prime Video" | "Disney+" | "Apple TV+" | "Hulu";
+export type Platform = string;
 
 export type Show = {
   id: string;
@@ -127,5 +127,3 @@ export const CATALOG: Show[] = [
     lastChecked: "Checked 8h ago",
   },
 ];
-
-export const DEFAULT_WATCHLIST_IDS = ["stranger-things", "snowfall", "sopranos"];
