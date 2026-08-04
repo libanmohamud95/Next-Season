@@ -46,72 +46,78 @@ export function Dashboard() {
 
   return (
     <>
-      <NavBar onAddClick={() => setDialogOpen(true)} />
-      <div className="mx-auto w-full max-w-6xl px-6 py-10 sm:py-14">
-        <header className="mb-8 flex flex-col gap-2">
-          <h1 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
-            Never miss a new season.
-          </h1>
-          <p className="max-w-xl text-muted">
-            Track your favorite shows and we&apos;ll tell you the moment a new
-            season is confirmed, dated, or ready to stream — and exactly where
-            to watch it.
-          </p>
-        </header>
+      <div inert={dialogOpen}>
+        <NavBar onAddClick={() => setDialogOpen(true)} />
+        <main className="mx-auto w-full max-w-6xl px-6 py-10 sm:py-14">
+          <header className="mb-8 flex flex-col gap-2">
+            <h1 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+              Never miss a new season.
+            </h1>
+            <p className="max-w-xl text-muted">
+              Track your favorite shows and we&apos;ll tell you the moment a
+              new season is confirmed, dated, or ready to stream — and
+              exactly where to watch it.
+            </p>
+          </header>
 
-        <StatsStrip shows={watchlist} />
+          <StatsStrip shows={watchlist} />
 
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_320px]">
-          <section>
-            <div className="mb-4 flex items-center justify-between">
-              <h2 className="text-lg font-medium text-foreground">
-                Your watchlist
-                <span className="ml-2 text-sm font-normal text-muted-2">
-                  {watchlist.length}
-                </span>
-              </h2>
-            </div>
-
-            {watchlist.length === 0 ? (
-              <div className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-border-subtle py-16 text-center">
-                <Clapperboard size={28} className="mb-3 text-muted-2" />
-                <p className="mb-4 text-muted">
-                  Your watchlist is empty. Add a show to start tracking it.
-                </p>
-                <button
-                  onClick={() => setDialogOpen(true)}
-                  className="rounded-full bg-accent px-4 py-2 text-sm font-medium text-white hover:bg-accent-hover"
-                >
-                  Add your first show
-                </button>
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_320px]">
+            <section>
+              <div className="mb-4 flex items-center justify-between">
+                <h2 className="text-lg font-medium text-foreground">
+                  Your watchlist
+                  <span className="ml-2 text-sm font-normal text-muted-2">
+                    {watchlist.length}
+                  </span>
+                </h2>
               </div>
-            ) : (
-              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3">
-                {watchlist.map((show) => (
-                  <ShowCard key={show.id} show={show} onRemove={handleRemove} />
-                ))}
-              </div>
-            )}
-          </section>
 
-          <aside className="lg:sticky lg:top-10 lg:h-fit">
-            <UpdatesFeed />
-          </aside>
-        </div>
+              {watchlist.length === 0 ? (
+                <div className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-border-subtle py-16 text-center">
+                  <Clapperboard size={28} className="mb-3 text-muted-2" />
+                  <p className="mb-4 text-muted">
+                    Your watchlist is empty. Add a show to start tracking it.
+                  </p>
+                  <button
+                    onClick={() => setDialogOpen(true)}
+                    className="rounded-full bg-accent px-4 py-2 text-sm font-medium text-white hover:bg-accent-hover"
+                  >
+                    Add your first show
+                  </button>
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3">
+                  {watchlist.map((show) => (
+                    <ShowCard
+                      key={show.id}
+                      show={show}
+                      onRemove={handleRemove}
+                    />
+                  ))}
+                </div>
+              )}
+            </section>
 
-        {recommendationGroups.map((group) => (
+            <aside className="lg:sticky lg:top-10 lg:h-fit">
+              <UpdatesFeed />
+            </aside>
+          </div>
+
+          {recommendationGroups.map((group) => (
+            <ShowRow
+              key={group.anchor.id}
+              title={`Because you're watching ${group.anchor.title}`}
+              shows={group.shows}
+              onAdd={handleAdd}
+            />
+          ))}
           <ShowRow
-            key={group.anchor.id}
-            title={`Because you're watching ${group.anchor.title}`}
-            shows={group.shows}
+            title="Discover more shows"
+            shows={otherShows}
             onAdd={handleAdd}
           />
-        ))}
-        <ShowRow
-          title="Discover more shows"
-          shows={otherShows}
-          onAdd={handleAdd}
-        />
+        </main>
       </div>
 
       <AddShowDialog

@@ -63,6 +63,14 @@ body {
   }
 }
 
-.animate-fade-in {
-  animation: fade-in 0.25s ease-out both;
+@media (prefers-reduced-motion: no-preference) {
+  .animate-fade-in {
+    animation: fade-in 0.25s ease-out both;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-in {
+    animation: none;
+  }
 }

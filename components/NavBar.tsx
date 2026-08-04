@@ -4,7 +4,10 @@ import { Clapperboard, Plus } from "lucide-react";
 
 export function NavBar({ onAddClick }: { onAddClick: () => void }) {
   return (
-    <div className="sticky top-0 z-30 border-b border-border-subtle bg-white/[0.04] backdrop-blur-xl">
+    <nav
+      aria-label="Primary"
+      className="sticky top-0 z-30 border-b border-border-subtle bg-white/[0.04] backdrop-blur-xl"
+    >
       <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-3.5">
         <div className="flex items-center gap-2 text-accent">
           <Clapperboard size={20} strokeWidth={2.25} />
@@ -20,6 +23,6 @@ export function NavBar({ onAddClick }: { onAddClick: () => void }) {
           Add show
         </button>
       </div>
-    </div>
+    </nav>
   );
 }
