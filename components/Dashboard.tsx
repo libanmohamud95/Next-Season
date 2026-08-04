@@ -11,21 +11,55 @@ import { ShowRow } from "@/components/ShowRow";
 import type { Show } from "@/lib/mock-data";
 import { buildRecommendations } from "@/lib/recommendations";
 import { loadWatchlistIds, saveWatchlistIds } from "@/lib/watchlist-storage";
+import { detectUpdates, type DetectedUpdate } from "@/lib/detect-updates";
+import {
+  loadSnapshots,
+  saveSnapshots,
+  loadLastVisit,
+  saveLastVisit,
+} from "@/lib/show-snapshot-storage";
 
 export function Dashboard({ catalog: CATALOG }: { catalog: Show[] }) {
   const [watchlistIds, setWatchlistIds] = useState<string[]>(() =>
     CATALOG.slice(0, 3).map((show) => show.id)
   );
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [recentUpdates, setRecentUpdates] = useState<DetectedUpdate[]>([]);
+  const [lastVisit, setLastVisit] = useState<string | null>(null);
   const skipNextSave = useRef(true);
 
   useEffect(() => {
-    const stored = loadWatchlistIds();
-    // Syncing from an external store (localStorage) on mount, not
-    // adjusting internal state — doing this during render instead would
-    // risk a hydration mismatch, since the server never has access to it.
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    if (stored) setWatchlistIds(stored);
+    const storedIds = loadWatchlistIds();
+    const resolvedIds = storedIds ?? watchlistIds;
+
+    // Syncing from external stores (localStorage) on mount, not adjusting
+    // internal state reactively — doing this during render instead would
+    // risk a hydration mismatch, since the server never has access to any
+    // of this. Intentionally runs once per page load: "what changed since
+    // last time" should reflect the moment you opened the app, not update
+    // retroactively as you add/remove shows this session.
+    if (storedIds) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setWatchlistIds(storedIds);
+    }
+
+    const resolvedWatchlist = resolvedIds
+      .map((id) => CATALOG.find((show) => show.id === id))
+      .filter((show): show is Show => Boolean(show));
+
+    const previousSnapshots = loadSnapshots();
+    const previousVisit = loadLastVisit();
+    const { updates, nextSnapshots } = detectUpdates(
+      resolvedWatchlist,
+      previousSnapshots
+    );
+
+    setRecentUpdates(updates);
+    setLastVisit(previousVisit);
+
+    saveSnapshots(nextSnapshots);
+    saveLastVisit(new Date().toISOString());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -119,7 +153,7 @@ export function Dashboard({ catalog: CATALOG }: { catalog: Show[] }) {
             </section>
 
             <aside className="lg:sticky lg:top-10 lg:h-fit">
-              <UpdatesFeed />
+              <UpdatesFeed updates={recentUpdates} lastVisit={lastVisit} />
             </aside>
           </div>
 

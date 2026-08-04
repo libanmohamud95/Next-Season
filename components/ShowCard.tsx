@@ -3,16 +3,8 @@
 import { Clock, X } from "lucide-react";
 import { Poster } from "@/components/Poster";
 import { StatusBadge } from "@/components/StatusBadge";
-import { countdownFor } from "@/lib/date";
+import { countdownFor, formatDate } from "@/lib/date";
 import type { Show } from "@/lib/mock-data";
-
-function formatDate(iso: string): string {
-  return new Intl.DateTimeFormat("en-US", {
-    month: "short",
-    day: "numeric",
-    year: "numeric",
-  }).format(new Date(`${iso}T00:00:00`));
-}
 
 export function ShowCard({
   show,
