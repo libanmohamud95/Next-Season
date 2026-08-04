@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Clapperboard } from "lucide-react";
 import { NavBar } from "@/components/NavBar";
 import { StatsStrip } from "@/components/StatsStrip";
@@ -10,12 +10,31 @@ import { UpdatesFeed } from "@/components/UpdatesFeed";
 import { ShowRow } from "@/components/ShowRow";
 import { CATALOG, DEFAULT_WATCHLIST_IDS } from "@/lib/mock-data";
 import { buildRecommendations } from "@/lib/recommendations";
+import { loadWatchlistIds, saveWatchlistIds } from "@/lib/watchlist-storage";
 
 export function Dashboard() {
   const [watchlistIds, setWatchlistIds] = useState<string[]>(
     DEFAULT_WATCHLIST_IDS
   );
   const [dialogOpen, setDialogOpen] = useState(false);
+  const skipNextSave = useRef(true);
+
+  useEffect(() => {
+    const stored = loadWatchlistIds();
+    // Syncing from an external store (localStorage) on mount, not
+    // adjusting internal state — doing this during render instead would
+    // risk a hydration mismatch, since the server never has access to it.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    if (stored) setWatchlistIds(stored);
+  }, []);
+
+  useEffect(() => {
+    if (skipNextSave.current) {
+      skipNextSave.current = false;
+      return;
+    }
+    saveWatchlistIds(watchlistIds);
+  }, [watchlistIds]);
 
   const watchlist = useMemo(
     () =>
